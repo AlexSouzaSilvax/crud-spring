@@ -11,7 +11,7 @@
 	<groupId>com.loiane</groupId>
 	<artifactId>crud-spring</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>crud-spring</name>
 	<description>Projeto exemplo CRUD Spring + Angular</description>
 	<properties>
