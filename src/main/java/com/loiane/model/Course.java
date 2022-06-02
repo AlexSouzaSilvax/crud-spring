@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -12,6 +15,7 @@ import lombok.Data;
 
 @Data
 @Entity
+@Table(name = "course")
 public class Course {
 
     @Id
@@ -19,10 +23,10 @@ public class Course {
     @JsonProperty("_id")
     private Long id;
 
-    @Column(name = "name", length = 200, nullable = false)
+    @Column(name = "name", length = 200, nullable = false)        
     private String name;
 
-    @Column(name = "category", length = 200, nullable = false)
+    @Column(name = "category", length = 200, nullable = false)    
     private String category;
 
 }

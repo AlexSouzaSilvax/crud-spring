@@ -1,5 +1,7 @@
 package com.loiane.controller;
 
+import javax.validation.Valid;
+
 import com.loiane.model.Course;
 import com.loiane.model.ReturnError;
 import com.loiane.service.CourseService;
@@ -33,13 +35,27 @@ public class CourseController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> create(@RequestBody Course course) {
+    @RequestMapping("create")
+    public ResponseEntity<Object> create(@RequestBody @Valid Course course) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(courseService.save(course));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ReturnError(HttpStatus.INTERNAL_SERVER_ERROR,
-                            HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), e.getMessage(), "/api/courses/POST"));
+                            HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), e.getMessage(), "/api/courses/create"));
+        }
+
+    }
+
+    @PostMapping
+    @RequestMapping("update")
+    public ResponseEntity<Object> update(@RequestBody Course course) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(courseService.update(course));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ReturnError(HttpStatus.INTERNAL_SERVER_ERROR,
+                            HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), e.getMessage(), "/api/courses/update"));
         }
 
     }
