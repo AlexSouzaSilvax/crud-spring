@@ -1,9 +1,8 @@
 package com.loiane.controller;
 
-import java.util.List;
-
 import com.loiane.model.Course;
-import com.loiane.repository.CourseRepository;
+import com.loiane.model.ReturnError;
+import com.loiane.service.CourseService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,16 +19,29 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class CourseController {
 
-    private CourseRepository courseRepository;
+    private CourseService courseService;
 
     @GetMapping
-    public List<Course> list() {
-        return courseRepository.findAll();
+    public ResponseEntity<Object> list() {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(courseService.findAll());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ReturnError(HttpStatus.INTERNAL_SERVER_ERROR,
+                            HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), e.getMessage(), "/api/courses/GET"));
+        }
     }
 
     @PostMapping
-    public ResponseEntity<Course> create(@RequestBody Course course) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(courseRepository.save(course));
+    public ResponseEntity<Object> create(@RequestBody Course course) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(courseService.save(course));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ReturnError(HttpStatus.INTERNAL_SERVER_ERROR,
+                            HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), e.getMessage(), "/api/courses/POST"));
+        }
+
     }
 
 }
