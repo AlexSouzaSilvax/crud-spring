@@ -60,4 +60,18 @@ public class CourseController {
 
     }
 
+    @PostMapping
+    @RequestMapping("delete")
+    public ResponseEntity<Object> delete(@RequestBody Long id) {
+        try {
+            courseService.delete(id);
+            return ResponseEntity.status(HttpStatus.OK).body(null);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ReturnError(HttpStatus.INTERNAL_SERVER_ERROR,
+                            HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), e.getMessage(), "/api/courses/delete"));
+        }
+
+    }
+
 }

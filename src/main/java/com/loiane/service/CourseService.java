@@ -29,7 +29,11 @@ public class CourseService {
     }
 
     public Course update(Course course) {
-        return courseRepository.update(course.getName(), course.getCategory(), course.getId());
+        return courseRepository.save(course);
+    }
+
+    public void delete(Long id) {
+        courseRepository.deleteById(id);
     }
 
 }
