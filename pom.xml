@@ -10,7 +10,7 @@
 	<groupId>com.loiane</groupId>
 	<artifactId>crud-spring</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<name>crud-spring</name>
 	<description>Projeto exemplo CRUD Spring + Angular</description>
 	<properties>
