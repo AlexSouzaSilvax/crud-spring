@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.loiane.model.Course;
 import com.loiane.repository.CourseRepository;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
@@ -34,6 +35,10 @@ public class CourseService {
 
     public void delete(Long id) {
         courseRepository.deleteById(id);
+    }
+
+    public List<Course> findAllDesc() {
+        return courseRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
     }
 
 }

@@ -26,7 +26,7 @@ public class CourseController {
     @GetMapping
     public ResponseEntity<Object> list() {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(courseService.findAll());
+            return ResponseEntity.status(HttpStatus.OK).body(courseService.findAllDesc());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ReturnError(HttpStatus.INTERNAL_SERVER_ERROR,
